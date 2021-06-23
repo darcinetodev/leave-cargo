@@ -30,7 +30,7 @@ jobs:
         docker_options: "--no-cache"
         process_type: web
     - name: migration
-      uses: liquibase/liquibase-github-action@v1
+      uses: docker://liquibase/liquibase:latest
       with:
         operation: 'update'
         changeLogFile: './src/main/resources/db/changelog.xml'
