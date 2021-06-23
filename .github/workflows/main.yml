@@ -18,17 +18,15 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - name: Heroku Container Registry login
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:login
-    - name: Build and push
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:push -a ${{ secrets.HEROKU_APP_NAME }} web
-    - name: Release
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:release -a ${{ secrets.HEROKU_APP_NAME }} web
+      uses: gonuit/heroku-docker-deploy@v1.3.3 # GitHub action name (leave it as it is).
+      with:
+        email: ${{ secrets.HEROKU_EMAIL }}
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+        heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+        dockerfile_directory: ./
+        dockerfile_name: Dockerfile
+        docker_options: "--no-cache"
+        process_type: web
     - name: migration
       uses: liquibase/liquibase-github-action@v1
       with:
@@ -37,4 +35,3 @@ jobs:
         username: ${{ secrets.DB_USERNAME }}
         password: ${{ secrets.DB_PASSWORD }}
         url: ${{ secrets.DB_URL }}
-        
