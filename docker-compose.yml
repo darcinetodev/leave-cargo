@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: localdb
+      POSTGRES_USER: local
+      POSTGRES_PASSWORD: docker
+    ports:
+      - 5432:5432
+
+  liquibase:
+    image: webdevops/liquibase:postgres
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    environment:
+      LIQUIBASE_URL: jdbc:postgresql://postgres:5432/localdb
+      LIQUIBASE_USERNAME: local
+      LIQUIBASE_PASSWORD: docker
+      LIQUIBASE_CHANGELOG: /db/changelog.xml
+    volumes:
+      - $PWD/src/main/resources/db:/db:ro
+    command: update

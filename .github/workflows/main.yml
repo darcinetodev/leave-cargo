@@ -1,0 +1,30 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: customer-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "Leave Cargo"
+          heroku_email: "darcinetodev@gmail.com"
+        env:
+          DATASOURCES_DEFAULT_URL: jdbc:postgresql://postgres:5432/localdb
+  migration:
+    runs-on: migration
+    steps:
+      - uses: actions/checkout@v2
+      - uses: liquibase/liquibase-github-action@v1
+        with:
+          operation: 'update'
+          changeLogFile: 'src/main/resources/db/changelog.xml'
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          url: ${{ secrets.URL }}
