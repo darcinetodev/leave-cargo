@@ -32,9 +32,4 @@ jobs:
     - name: migration
       uses: docker://liquibase/liquibase:latest
       with:
-        operation: 'update'
-        changeLogFile: './src/main/resources/db/changelog.xml'
-        classpath: './src/main/resources/db'
-        username: ${{ secrets.DB_USERNAME }}
-        password: ${{ secrets.DB_PASSWORD }}
-        url: ${{ secrets.DB_URL }}
+        args: --url=${{ secrets.DB_URL }} --changeLogFile=./src/main/resources/db/changelog.xml --username=${{ secrets.DB_USERNAME }} --password=${{ secrets.DB_PASSWORD }} --logLevel=debug update
