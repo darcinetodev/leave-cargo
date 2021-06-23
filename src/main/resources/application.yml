@@ -2,7 +2,7 @@ micronaut:
   application:
     name: customer-service
   server:
-    port: 80
+    port: 8080
   router:
     static-resources:
       swagger:
