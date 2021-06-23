@@ -12,9 +12,6 @@ micronaut:
         paths: classpath:META-INF/swagger/views/swagger-ui
         mapping: /swagger-ui/**
 
-redis:
-  uri: redis://localhost
-
 endpoints:
   health:
     enabled: true
@@ -25,9 +22,9 @@ jackson:
 
 datasources:
   default:
-    url: 'jdbc:postgresql://ec2-35-169-188-58.compute-1.amazonaws.com:5432/dekpul6hhqcjji'
-    username: 'ogncvzqlhdppim'
-    password: '10e394d5460f970a4e548ccd6b9cdd1b05e00cddcc8ea8a166188d83f1a07c56'
+    url: 'jdbc:postgresql://localhost:5432/localdb'
+    username: 'local'
+    password: 'docker'
     driverClassName: 'org.postgresql.Driver'
     initialSize: 2
     minIdle: 2

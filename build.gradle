@@ -46,8 +46,6 @@ dependencies {
     implementation("io.micronaut.data:micronaut-data-jdbc:2.4.4")
     implementation("io.swagger.core.v3:swagger-annotations")
     implementation("org.springframework.security:spring-security-crypto:5.5.0")
-    implementation("io.micronaut.redis:micronaut-redis-lettuce")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
 
     kapt platform("io.micronaut:micronaut-bom:$micronautVersion")
     kapt("io.micronaut:micronaut-graal")
