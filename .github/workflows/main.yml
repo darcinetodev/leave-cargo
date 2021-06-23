@@ -13,8 +13,9 @@ jobs:
     - name: migration
       uses: liquibase/liquibase-github-action@v1
       with:
-        changeLogFile: 'changelog.xml'
+        operation: 'update'
         classpath: './src/main/resources/db'
+        changeLogFile: 'changelog.xml'
         username: ${{ secrets.DB_USERNAME }}
         password: ${{ secrets.DB_PASSWORD }}
         url: ${{ secrets.DB_URL }}
