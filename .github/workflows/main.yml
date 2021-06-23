@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: customer-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12
@@ -17,14 +17,10 @@ jobs:
           heroku_email: "darcinetodev@gmail.com"
         env:
           DATASOURCES_DEFAULT_URL: jdbc:postgresql://postgres:5432/localdb
-  migration:
-    runs-on: migration
-    steps:
-      - uses: actions/checkout@v2
       - uses: liquibase/liquibase-github-action@v1
         with:
           operation: 'update'
           changeLogFile: 'src/main/resources/db/changelog.xml'
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          url: ${{ secrets.URL }}
+          username: ${{ secrets.DB_USERNAME }}
+          password: ${{ secrets.DB_PASSWORD }}
+          url: ${{ secrets.DB_URL }}
