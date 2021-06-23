@@ -10,6 +10,8 @@ jobs:
     steps:
     - name: Git Checkout
       uses: actions/checkout@v2
+    - name: teste
+      run: RUN chmod 777 /usr/local/bin/docker-entrypoint.sh && ln -s /usr/local/bin/docker-entrypoint.sh
     - name: migration
       uses: liquibase/liquibase-github-action@v1
       with:
