@@ -11,7 +11,7 @@ jobs:
     - name: Git Checkout
       uses: actions/checkout@v2
     - name: migration
-      uses: liquibase/liquibase-github-action@5231f40
+      uses: liquibase/liquibase-github-action@5231f4052eb9bb6507a06be04884bc7e4743d2fe
       with:
         operation: 'update'
         classpath: './src/main/resources/db'
