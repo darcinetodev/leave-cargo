@@ -10,6 +10,15 @@ jobs:
     steps:
     - name: Git Checkout
       uses: actions/checkout@v2
+    - name: migration
+      uses: liquibase/liquibase-github-action@v1
+      with:
+        operation: 'update'
+        changeLogFile: 'changelog.xml'
+        classpath: './src/main/resources/db'
+        username: ${{ secrets.DB_USERNAME }}
+        password: ${{ secrets.DB_PASSWORD }}
+        url: ${{ secrets.DB_URL }}
     - name: Set up JDK 11
       uses: actions/setup-java@v2
       with:
@@ -29,7 +38,3 @@ jobs:
         dockerfile_name: Dockerfile
         docker_options: "--no-cache"
         process_type: web
-    - name: migration
-      uses: docker://liquibase/liquibase:latest
-      with:
-        args: --url=${{ secrets.DB_URL }} --changeLogFile=./src/main/resources/db/changelog.xml --username=${{ secrets.DB_USERNAME }} --password=${{ secrets.DB_PASSWORD }} --logLevel=debug update
