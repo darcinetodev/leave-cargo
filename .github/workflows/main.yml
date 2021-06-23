@@ -34,6 +34,7 @@ jobs:
       with:
         operation: 'update'
         changeLogFile: './src/main/resources/db/changelog.xml'
+        classpath: './src/main/resources/db'
         username: ${{ secrets.DB_USERNAME }}
         password: ${{ secrets.DB_PASSWORD }}
         url: ${{ secrets.DB_URL }}
